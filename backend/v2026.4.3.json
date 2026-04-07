@@ -1,0 +1,19 @@
+{
+  "version": "2026.04.3",
+  "channel": "stable",
+  "releaseNotes": "Backend update system fixes: Docker config mount for GHCR auth, --ignore-buildable for mixed environments, config validation clamp-and-warn.",
+  "releasedAt": "2026-04-06T00:00:00Z",
+  "minClientVersion": "2026.02.0",
+  "images": [
+    "ghcr.io/feanorscodesl/tengwar-backend:2026.04.3",
+    "ghcr.io/feanorscodesl/tengwar-frontend:2026.04.3",
+    "ghcr.io/feanorscodesl/tengwar-ingester:2026.04.3",
+    "ghcr.io/feanorscodesl/tengwar-tokenizer:2026.04.3",
+    "ghcr.io/feanorscodesl/tengwar-translator:2026.04.3",
+    "ghcr.io/feanorscodesl/tengwar-chat:2026.04.3",
+    "ghcr.io/feanorscodesl/tengwar-embedding:2026.04.3",
+    "ghcr.io/feanorscodesl/tengwar-reranker:2026.04.3",
+    "ghcr.io/feanorscodesl/tengwar-glm-ocr:2026.04.3",
+    "ghcr.io/feanorscodesl/tengwar-discovery:2026.04.3"
+  ]
+}
