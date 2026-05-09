@@ -1,15 +1,34 @@
 # Tengwar Releases
 
-Release manifests for the Tengwar update system. This repo contains only version metadata — no source code.
+Public release metadata for the Tengwar update system. This repository contains
+metadata only: no source code, no private container images, no SBOMs, no
+provenance attestations, no registry tokens, and no customer secrets.
 
 ## Structure
 
-```
-backend/v{version}.json    — Backend release manifests
-desktop/v{version}.json    — Desktop release manifests (future)
+```text
+backend/latest.json       — pointer to the current backend release manifest
+backend/v{version}.json   — backend release manifests
+manifest.yaml             — public MCP catalog metadata
 ```
 
-## Manifest Format
+## MCP Catalog
+
+`manifest.yaml` has a top-level `mcps:` list. Each entry is public metadata that
+lets Tengwar show an available connector and pull a private GHCR image by digest
+using the customer's deployment token. The artifact itself remains private.
+
+Current bootstrap shape:
+
+```yaml
+mcps: []
+```
+
+MCP catalog entries are reviewed by PR and validated by CI. Entries must contain
+only public metadata: id, vertical, image name, version, image digest, config
+schema version, bundle tags, display name, and minimum Tengwar backend version.
+
+## Backend Manifest Format
 
 ```json
 {
