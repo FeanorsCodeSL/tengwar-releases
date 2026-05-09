@@ -1,0 +1,3 @@
+# Public MCP catalog metadata only.
+# Images, SBOMs, provenance, source code, and secrets remain private.
+mcps: []

@@ -1,0 +1,130 @@
+name: Validate release metadata
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate-mcp-catalog:
+    name: Validate MCP catalog
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Install YAML parser
+        run: python3 -m pip install 'pyyaml==6.*'
+
+      - name: Validate manifest.yaml
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import re
+          import sys
+          from pathlib import Path
+
+          import yaml
+
+          manifest_path = Path('manifest.yaml')
+          if not manifest_path.exists():
+              sys.exit('::error::manifest.yaml is required')
+
+          data = yaml.safe_load(manifest_path.read_text(encoding='utf-8'))
+          if not isinstance(data, dict):
+              sys.exit('::error::manifest.yaml root must be a mapping')
+
+          mcps = data.get('mcps')
+          if not isinstance(mcps, list):
+              sys.exit('::error::manifest.yaml must contain a top-level mcps list')
+
+          required = [
+              'id',
+              'vertical',
+              'image',
+              'version',
+              'imageDigest',
+              'schemaVersion',
+              'bundles',
+              'displayName',
+              'minTengwarBackend',
+          ]
+          allowed = set(required)
+          verticals = {'erp', 'legal', 'finance', 'utilities', 'action', 'mail', 'esign', 'public'}
+          patterns = {
+              'id': re.compile(r'^[a-z][a-z0-9-]*$'),
+              'image': re.compile(r'^[a-z0-9][a-z0-9._/-]*$'),
+              'version': re.compile(r'^\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?$'),
+              'imageDigest': re.compile(r'^sha256:[a-f0-9]{64}$'),
+              'bundle': re.compile(r'^[a-z][a-z0-9-]*$'),
+              'minTengwarBackend': re.compile(r'^\d{4}\.\d{1,2}(?:\.\d+)?$'),
+          }
+
+          seen = set()
+          errors = []
+          for index, entry in enumerate(mcps):
+              where = f'mcps[{index}]'
+              if not isinstance(entry, dict):
+                  errors.append(f'{where}: entry must be a mapping')
+                  continue
+
+              missing = [key for key in required if key not in entry]
+              for key in missing:
+                  errors.append(f'{where}: missing required field {key}')
+
+              extra = sorted(set(entry) - allowed)
+              for key in extra:
+                  errors.append(f'{where}: unexpected field {key}; catalog may contain only public metadata')
+
+              if missing:
+                  continue
+
+              if not isinstance(entry['id'], str) or not patterns['id'].match(entry['id']):
+                  errors.append(f'{where}.id: invalid MCP id')
+              elif entry['id'] in seen:
+                  errors.append(f'{where}.id: duplicate MCP id {entry["id"]}')
+              else:
+                  seen.add(entry['id'])
+
+              if entry['vertical'] not in verticals:
+                  errors.append(f'{where}.vertical: invalid vertical')
+
+              image = entry['image']
+              if not isinstance(image, str) or not patterns['image'].match(image):
+                  errors.append(f'{where}.image: invalid image name')
+              elif any(marker in image for marker in ('ghcr.io', ':', '@')):
+                  errors.append(f'{where}.image: must be an image name only, not a registry/artifact reference')
+
+              for key in ('version', 'imageDigest', 'minTengwarBackend'):
+                  if not isinstance(entry[key], str) or not patterns[key].match(entry[key]):
+                      errors.append(f'{where}.{key}: invalid value')
+
+              if not isinstance(entry['schemaVersion'], int) or isinstance(entry['schemaVersion'], bool) or entry['schemaVersion'] < 1:
+                  errors.append(f'{where}.schemaVersion: must be an integer >= 1')
+
+              bundles = entry['bundles']
+              if not isinstance(bundles, list):
+                  errors.append(f'{where}.bundles: must be a list')
+              else:
+                  bundle_values = [bundle for bundle in bundles if isinstance(bundle, str)]
+                  if len(bundle_values) != len(set(bundle_values)):
+                      errors.append(f'{where}.bundles: duplicate bundle tags are not allowed')
+                  for bundle in bundles:
+                      if not isinstance(bundle, str) or not patterns['bundle'].match(bundle):
+                          errors.append(f'{where}.bundles: invalid bundle {bundle!r}')
+
+              if not isinstance(entry['displayName'], str) or not entry['displayName'].strip():
+                  errors.append(f'{where}.displayName: must be non-empty')
+
+          if errors:
+              for error in errors:
+                  print(f'::error::{error}')
+              raise SystemExit(1)
+
+          print(f'Validated {len(mcps)} MCP catalog entr{"y" if len(mcps) == 1 else "ies"}.')
+          PY
