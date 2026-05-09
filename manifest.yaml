@@ -13,3 +13,218 @@ mcps:
   - construction-bundle
   displayName: Utilidades españolas (validadores, AEAT, Norma 43, XAdES)
   minTengwarBackend: '2026.4'
+- id: odoo
+  vertical: erp
+  image: mcp-erp-odoo
+  version: 0.1.0
+  imageDigest: sha256:a4d1e4148b2a20a1428f0250f4769352e11cc8fb1ff186e66eb57a0eacb0727b
+  schemaVersion: 1
+  bundles:
+  - erp-bundle
+  - asesoria-bundle
+  displayName: Odoo (Community / Enterprise)
+  minTengwarBackend: '2026.4'
+- id: facturascripts
+  vertical: erp
+  image: mcp-erp-facturascripts
+  version: 0.1.0
+  imageDigest: sha256:fcbc35ed15b681e61509fbaf6ee97fc58fa2a948bae2bb94656f023a5d6dac2a
+  schemaVersion: 1
+  bundles:
+  - erp-bundle
+  - asesoria-bundle
+  displayName: FacturaScripts
+  minTengwarBackend: '2026.4'
+- id: boe
+  vertical: legal
+  image: mcp-legal-boe
+  version: 0.1.0
+  imageDigest: sha256:602167167fcc9f8380bfb6e750216bfeb988ac6b7d8b6f82bfd07dd4e9243ebd
+  schemaVersion: 1
+  bundles:
+  - legal-bundle
+  - asesoria-bundle
+  - construction-bundle
+  displayName: BOE — Boletín Oficial del Estado
+  minTengwarBackend: '2026.4'
+- id: borme
+  vertical: legal
+  image: mcp-legal-borme
+  version: 0.1.0
+  imageDigest: sha256:817d135a0030351f2650a2710f72822095fd7471756e1e9c0520bd11e720a04f
+  schemaVersion: 1
+  bundles:
+  - legal-bundle
+  - asesoria-bundle
+  displayName: BORME — Boletín Oficial del Registro Mercantil
+  minTengwarBackend: '2026.4'
+- id: verifactu
+  vertical: finance
+  image: mcp-finance-verifactu
+  version: 0.1.0
+  imageDigest: sha256:82bc91d0c5af20fde8e48866ef6d5756952b1f5e808c00ad51e64543458533af
+  schemaVersion: 1
+  bundles:
+  - finance-bundle
+  - asesoria-bundle
+  displayName: VeriFactu (validacion local, hash y QR)
+  minTengwarBackend: '2026.4'
+- id: facturae
+  vertical: finance
+  image: mcp-finance-facturae
+  version: 0.1.0
+  imageDigest: sha256:2d54f796c10d5e02c0a27318e94d5cfb3a7f1d9577b7a144ed6ec96a50fce1a6
+  schemaVersion: 1
+  bundles:
+  - finance-bundle
+  - asesoria-bundle
+  displayName: Facturae (validacion, borrador y firma XAdES)
+  minTengwarBackend: '2026.4'
+- id: faceb2b
+  vertical: finance
+  image: mcp-finance-faceb2b
+  version: 0.1.0
+  imageDigest: sha256:374b3d5f99d6ae0cc89fe76138a59bd3e76713307e59778179b7580a770ada8f
+  schemaVersion: 1
+  bundles:
+  - finance-bundle
+  - asesoria-bundle
+  displayName: FACeB2B (estado y evidencia)
+  minTengwarBackend: '2026.4'
+- id: ticketbai
+  vertical: finance
+  image: mcp-finance-ticketbai
+  version: 0.1.0
+  imageDigest: sha256:93dcfdfa986d4c2ee71ddb59e4ff8dffb25a925baef6b5f4b3dcaf9f14fc0de3
+  schemaVersion: 1
+  bundles:
+  - finance-bundle
+  displayName: TicketBAI (validacion local y evidencia)
+  minTengwarBackend: '2026.4'
+- id: dehu
+  vertical: legal
+  image: mcp-legal-dehu
+  version: 0.1.0
+  imageDigest: sha256:7acd0160eb55a78dc6679f026173d704c6376a339bdee14075e4b52324f28608
+  schemaVersion: 1
+  bundles:
+  - legal-bundle
+  - asesoria-bundle
+  displayName: DEHU - Direccion Electronica Habilitada unica
+  minTengwarBackend: '2026.4'
+- id: lexnet
+  vertical: legal
+  image: mcp-legal-lexnet
+  version: 0.1.0
+  imageDigest: sha256:e655d5a9c41c8eb91defa93a149631406ced755c2d4ba31a1ffb5d2fdbffcf54
+  schemaVersion: 1
+  bundles:
+  - legal-bundle
+  displayName: LexNET
+  minTengwarBackend: '2026.4'
+- id: dynamics-bc
+  vertical: erp
+  image: mcp-erp-dynamics-bc
+  version: 0.1.0
+  imageDigest: sha256:f97f3e216c199f9eb9e57b27a6809cacc453fea0e1ac3cf26c4f6e364543c515
+  schemaVersion: 1
+  bundles: []
+  displayName: Microsoft Dynamics 365 Business Central
+  minTengwarBackend: '2026.4'
+- id: sap-b1
+  vertical: erp
+  image: mcp-erp-sap-b1
+  version: 0.1.0
+  imageDigest: sha256:3293ea2ea0648713ad550659fd1525acb351c5959792baf85b5312bd1788076e
+  schemaVersion: 1
+  bundles: []
+  displayName: SAP Business One
+  minTengwarBackend: '2026.4'
+- id: netsuite
+  vertical: erp
+  image: mcp-erp-netsuite
+  version: 0.1.0
+  imageDigest: sha256:32c9a7fc2b8dc427dcdb46e724b61ee879edee8d1c90612886a82ba6a3f4097e
+  schemaVersion: 1
+  bundles: []
+  displayName: Oracle NetSuite
+  minTengwarBackend: '2026.4'
+- id: sage50
+  vertical: erp
+  image: mcp-erp-sage50
+  version: 0.1.0
+  imageDigest: sha256:ce632eb314fa283680360608205f6fdcf5f530239f2897464cd8c45bbff5e613
+  schemaVersion: 1
+  bundles: []
+  displayName: Sage 50cloud Spain (ODBC)
+  minTengwarBackend: '2026.4'
+- id: mail
+  vertical: action
+  image: mcp-action-mail
+  version: 0.1.0
+  imageDigest: sha256:f6441bbf9d0379dec05588e45d005ec7fb523ff43c51f718f3ada7ab9ec8bcca
+  schemaVersion: 1
+  bundles:
+  - legal-bundle
+  displayName: Mail - correo y calendario
+  minTengwarBackend: '2026.4'
+- id: esign
+  vertical: action
+  image: mcp-action-esign
+  version: 0.1.0
+  imageDigest: sha256:ceabd3cf45ab6f3cfd893a72ab46c549109544e818355a0f2f7290dbed7e7f84
+  schemaVersion: 1
+  bundles:
+  - legal-bundle
+  - finance-bundle
+  - construction-bundle
+  displayName: E-Sign - firma electronica
+  minTengwarBackend: '2026.4'
+- id: catastro
+  vertical: public
+  image: mcp-public-catastro
+  version: 0.1.0
+  imageDigest: sha256:8e2e5cd146ceb0234d4e037e96b144f7fc0e778ecbde3ea577cb06f1254e9130
+  schemaVersion: 1
+  bundles:
+  - construction-bundle
+  displayName: Catastro público
+  minTengwarBackend: '2026.5'
+- id: aemet
+  vertical: public
+  image: mcp-public-aemet
+  version: 0.1.0
+  imageDigest: sha256:11b49e72277178caa7d4367d3ce2c80779f514763610924bf1620e9d4a8e6c86
+  schemaVersion: 1
+  bundles:
+  - construction-bundle
+  displayName: AEMET OpenData
+  minTengwarBackend: '2026.5'
+- id: aemps
+  vertical: public
+  image: mcp-public-aemps
+  version: 0.1.0
+  imageDigest: sha256:a2accf1f49cee35a7877948e618b4f377b1aa62b165e4cdfe05f6ecf1a6acbd2
+  schemaVersion: 1
+  bundles: []
+  displayName: AEMPS CIMA
+  minTengwarBackend: '2026.5'
+- id: bdns
+  vertical: public
+  image: mcp-public-bdns
+  version: 0.1.0
+  imageDigest: sha256:d092ac3b776e193bb0bcebbab6971167d95dd3e5572af88cfd8c07a8c755b710
+  schemaVersion: 1
+  bundles: []
+  displayName: BDNS ayudas públicas
+  minTengwarBackend: '2026.5'
+- id: placsp
+  vertical: public
+  image: mcp-public-placsp
+  version: 0.1.0
+  imageDigest: sha256:022491dde132ed0b764ac1aa32a7d2512884f1f05bbef153fa2961150f6c575a
+  schemaVersion: 1
+  bundles:
+  - construction-bundle
+  displayName: PLACSP licitaciones
+  minTengwarBackend: '2026.5'
