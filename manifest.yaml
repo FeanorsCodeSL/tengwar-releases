@@ -1,3 +1,15 @@
 # Public MCP catalog metadata only.
 # Images, SBOMs, provenance, source code, and secrets remain private.
-mcps: []
+mcps:
+- id: spanish-utils
+  vertical: utilities
+  image: mcp-utilities-spanish
+  version: 0.1.5
+  imageDigest: sha256:c9ba0be5132920c147a6e3a8602b709c0839268f7238553102de4ac8941a758d
+  schemaVersion: 1
+  bundles:
+  - finance-bundle
+  - asesoria-bundle
+  - construction-bundle
+  displayName: Utilidades españolas (validadores, AEAT, Norma 43, XAdES)
+  minTengwarBackend: '2026.4'
